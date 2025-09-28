@@ -64,11 +64,11 @@ public class EventParser {
     }
 
     public boolean isWriteOperation() {
-        return this.event.getOperationType().equals(CREATE) ? true : false;
+        return this.event.getOperationType().equals(CREATE);
     }
 
     public boolean isDeleteOperation() {
-        return this.event.getOperationType().equals(DELETE) ? true : false;
+        return this.event.getOperationType().equals(DELETE);
     }
 
 
@@ -85,15 +85,15 @@ public class EventParser {
     }
 
     public Boolean isUserEvent() {
-        return getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_USERS);
+        return (Boolean) getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_USERS);
     }
 
     public Boolean isRoleEvent() {
-        return getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_ROLES_BY_ID);
+        return (Boolean) getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_ROLES_BY_ID);
     }
 
     public Boolean isGroupEvent() {
-        return getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_GROUPS);
+        return (Boolean) getEventResourceName().equalsIgnoreCase(EVT_RESOURCE_GROUPS);
     }
 
     public String getEventObjectId() {

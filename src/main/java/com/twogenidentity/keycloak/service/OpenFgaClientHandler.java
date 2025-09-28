@@ -20,7 +20,7 @@ public class OpenFgaClientHandler {
     protected final Config.Scope config;
     private final OpenFgaClient fgaClient;
     private final OpenFgaHelper fgaHelper;
-    private Boolean isClientInitialized = false;
+    private Boolean isClientInitialized = (Boolean) false;
 
     private final ClientWriteOptions clientWriteOptions;
 
@@ -42,7 +42,7 @@ public class OpenFgaClientHandler {
                 && StringUtil.isNotBlank(getOpenFgaAuthorizationModelId())) {
             configuration.storeId(getOpenFgaOpenStoreId());
             configuration.authorizationModelId(getOpenFgaAuthorizationModelId());
-            this.isClientInitialized = true;
+            this.isClientInitialized = (Boolean) true;
         };
 
         this.fgaHelper = new OpenFgaHelper();
@@ -72,12 +72,12 @@ public class OpenFgaClientHandler {
            LOG.infof("Found store id: %s", store.getId());
            this.fgaClient.setStoreId(store.getId());
            ReadAuthorizationModelsResponse authorizationModels = fgaClient.readAuthorizationModels().get();
-           if(authorizationModels.getAuthorizationModels().size() > 0) {
+           if(!authorizationModels.getAuthorizationModels().isEmpty()) {
                AuthorizationModel model = authorizationModels.getAuthorizationModels().get(0);
                LOG.infof("Found authorization model id: %s", model.getId());
                this.fgaClient.setAuthorizationModelId(model.getId());
                this.fgaHelper.loadModel(model);
-               this.isClientInitialized = true;
+               this.isClientInitialized = (Boolean) true;
            }
         }
         return this.isClientInitialized;

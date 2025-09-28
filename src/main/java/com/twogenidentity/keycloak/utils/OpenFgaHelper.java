@@ -29,13 +29,13 @@ public class OpenFgaHelper {
     }
 
     private Boolean isTypeDefinitionInModel(String eventObjectType) {
-        return !this.model.getTypeDefinitions().stream()
+        return (Boolean) this.model.getTypeDefinitions().stream()
                 .filter(r -> r.getType().equalsIgnoreCase(eventObjectType))
-                .findFirst().isEmpty();
+                .findFirst().isPresent();
     }
 
     private Boolean isRelationAvailableInModel(String typeDefinition, String objectType) {
-        return this.modelTypeObjectAndRelation.containsKey(typeDefinition + objectType);
+        return (Boolean) this.modelTypeObjectAndRelation.containsKey(typeDefinition + objectType);
     }
 
     private String getRelationFromModel(String typeDefinition, String objectType){
@@ -94,7 +94,7 @@ public class OpenFgaHelper {
     }
 
     public Boolean isAvailableClientRequest(ClientWriteRequest request) {
-        return ((request.getWrites() != null && !request.getWrites().isEmpty())
-                || (request.getDeletes() !=null && !request.getDeletes().isEmpty()));
+        return (Boolean) ((request.getWrites() != null && !request.getWrites().isEmpty())
+                        || (request.getDeletes() !=null && !request.getDeletes().isEmpty()));
     }
 }
